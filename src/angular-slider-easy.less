@@ -1,0 +1,94 @@
+@import "variables";
+
+slider-easy{
+
+    display: block;
+    position: relative;
+    width: 100%;
+    .slider {
+        display: block;
+        vertical-align: middle;
+        position: relative;
+        width: 80%;
+        height: @slider-height;
+        margin: 0 auto;
+        .slider-track{
+            height: @slider-height / 2;
+            width: 100%;
+            margin-top: -(@slider-height / 4);
+            top: 50%;
+            left: 0;
+            position: absolute;
+            cursor: pointer;
+            background-color: #f7f7f7;
+            background-image: linear-gradient(to bottom, #f5f5f5, #f9f9f9);
+            background-repeat: repeat-x;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+
+            .slider-selection{
+                height: 100%;
+                top: 0;
+                bottom: 0;
+                position: absolute;
+                background-image: linear-gradient(to bottom, #f9f9f9, #f5f5f5);
+                background-repeat: repeat-x;
+                box-sizing: border-box;
+                border-radius: 4px;
+            }
+
+            .slider-handle{
+                margin-left: -(@slider-height / 2);
+                margin-top: -(@slider-height / 4);
+                border-radius: @slider-height;
+                position: absolute;
+                width: @slider-handle-width;
+                height: @slider-handle-height;
+                background-image: linear-gradient(to bottom, #149bdf, #0480be);
+                background-repeat: repeat-x;
+                opacity: 0.8;
+                border: 0px solid transparent;
+            }
+        }
+
+        .tooltip {
+            position: absolute;
+            z-index: 1030;
+            display: block;
+            font-size: 11px;
+            line-height: 1.4;
+            opacity: 1;
+            visibility: visible;
+
+            .tooltip-inner {
+                max-width: 200px;
+                padding: 8px;
+                color: #ffffff;
+                text-align: center;
+                text-decoration: none;
+                background-color: #000000;
+                border-radius: 4px;
+            }
+            
+            &.bottom {
+                padding: 5px 0;
+                margin-bottom: -3px;
+                .tooltip-arrow {
+                    top: 0;
+                    left: 50%;
+                    margin-left: -5px;
+                    border-bottom-color: #000000;
+                    border-width: 0 5px 5px 5px;
+                }
+            }
+
+            .tooltip-arrow {
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+            }
+        }
+    }
+}

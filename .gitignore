@@ -1,0 +1,9 @@
+#demo
+demo/angular-slider-easy.css
+demo/angular-slider-easy.js
+
+#npm
+node_modules/
+
+#bower
+demo/bower/

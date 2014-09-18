@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <title>DEMO</title>
+    <link rel="stylesheet" type="text/css" href="angular-slider-easy.css">
+    <link rel="stylesheet" type="text/css" href="demo.css">
+</head>
+<body>
+
+<div ng-controller="DemoController" class="container">
+    <slider-easy value="output"></slider-easy>
+    <span>{{ output.point }}</span>
+</div>
+    
+</body>
+</html>
+<script type="text/javascript" src="bower/angular/angular.min.js"></script>
+<script type="text/javascript" src="angular-slider-easy.js"></script>
+<script type="text/javascript" src="demo.js"></script>
