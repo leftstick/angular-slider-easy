@@ -6,6 +6,12 @@
             $scope.output = {
                 point: 90
             };
+
+            $scope.option = {
+                start: 3,
+                end: 218,
+                handles: [19, 55]
+            };
     }]);
 
 }(angular));

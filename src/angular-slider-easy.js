@@ -43,6 +43,27 @@
         return ((mov / width) * len).toFixed(decimals);
     };
 
+    var setHintPosition = function($hint, $handle0, $handle1) {
+        var handle0 = parseInt($handle0.css('left'));
+        if (!$handle1) {
+            $hint.css('left', (handle0 - 3 - $hint.prop('clientWidth') / 2) + 'px');
+            return;
+        }
+        var handle1 = parseInt($handle1.css('left'));
+        var max = Math.max(handle0, handle1);
+        var min = Math.min(handle0, handle1);
+        $hint.css('left', ((max - min) / 2 + min - 3 - $hint.prop('clientWidth') / 2) + 'px');
+    };
+
+    var setSelction = function($selection, $handle0, $handle1) {
+        var handle0 = parseInt($handle0.css('left'));
+        var handle1 = parseInt($handle1.css('left'));
+        var max = Math.max(handle0, handle1);
+        var min = Math.min(handle0, handle1);
+        var wid = max - min;
+        $selection.css('left', min + 'px').css('width', wid + 'px');
+    };
+
     var dir = function() {
         return {
             restrict: 'E',
@@ -55,25 +76,47 @@
                 var $doc = angular.element(document);
 
                 var opts = _defaults($scope.option, defaults);
+
                 var $slider = angular.element(element.children()[0]);
                 var $track = angular.element($slider.children()[0]);
+                var $hint = angular.element($slider.children()[1]);
+                var $selection = angular.element($track.children()[0]);
 
                 var len = opts.end - opts.start;
                 var width = $slider.prop('clientWidth');
-                console.log(width);
+
                 var minPoint = getPoint(len, width, opts.start);
                 var maxPoint = getPoint(len, width, opts.end);
+
                 var $handle0 = angular.element(handle);
                 $track.append($handle0);
-                $handle0.css('left', getPoint(len, width, opts.handles[0]) + 'px');
+                var initPoint0 = getPoint(len, width, opts.handles[0]);
+                $handle0.css('left', initPoint0 + 'px');
+                setHintPosition($hint, $handle0);
+
+                var $handle1;
+                if (opts.handles[1]) {
+                    $handle1 = angular.element(handle);
+                    $track.append($handle1);
+                    var initPoint1 = getPoint(len, width, opts.handles[1]);
+                    $handle1.css('left', initPoint1 + 'px');
+                    setHintPosition($hint, $handle0, $handle1);
+                    setSelction($selection, $handle0, $handle1);
+                }
+
 
                 var startPoint = 0;
-                var offset = minPoint;
+                var offset = initPoint0;
 
                 var move = function(event) {
                     var movement = offset + event.clientX - startPoint;
                     if (movement >= minPoint && movement <= maxPoint) {
                         $handle0.css('left', movement + 'px');
+                        setHintPosition($hint, $handle0);
+                        if ($handle1) {
+                            setSelction($selection, $handle0, $handle1);
+                            setHintPosition($hint, $handle0, $handle1);
+                        }
                         $scope.$apply(function() {
                             $scope.value.point = getValue(len, width, movement, opts.decimals);
                         });
@@ -102,7 +145,7 @@
 
                 $handle0.on('mousedown', start);
             },
-            template: '<div class="slider"><div class="slider-track"><div class="slider-selection"></div></div><div class="tooltip bottom" style="top: 40px; left: 19.5px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">{{ value }}</div></div></div>'
+            template: '<div class="slider"><div class="slider-track"><div class="slider-selection"></div></div><div class="hint"><div class="hint-arrow"></div><div class="hint-inner">{{ value }}</div></div></div>'
         };
     };
 
