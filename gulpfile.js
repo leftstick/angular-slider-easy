@@ -9,20 +9,36 @@ var compileLess = function(isDemo) {
     var less = require('gulp-less');
     var prefix = require('gulp-autoprefixer');
     var sourcemap = require('gulp-sourcemaps');
+    var rename = require('gulp-rename');
+    var merge = require('merge-stream');
 
     var dest = isDemo ? demoPath : distPath;
+    var css = gulp.src('./src/angular-slider-easy.less')
+        .pipe(less())
+        .pipe(prefix({
+            browsers: ['last 5 versions'],
+            cascade: true
+        }))
+        .pipe(gulp.dest(dest));
+    if (isDemo) {
+        return css;
+    }
 
-    return gulp.src('./src/angular-slider-easy.less')
+    var mincss = gulp.src('./src/angular-slider-easy.less')
+        .pipe(rename({
+            extname: '.min.css'
+        }))
         .pipe(sourcemap.init())
         .pipe(less({
-            compress: !isDemo
+            compress: true
         }))
         .pipe(sourcemap.write())
         .pipe(prefix({
             browsers: ['last 5 versions'],
-            cascade: isDemo
+            cascade: false
         }))
         .pipe(gulp.dest(dest));
+    return merge(css, mincss);
 };
 
 var copyjs = function(isDemo) {
@@ -43,15 +59,13 @@ var copyjs = function(isDemo) {
         .pipe(rename({
             extname: '.min.js'
         }))
-        .pipe(uglify())
+        .pipe(uglify({
+            outSourceMap: 'angular-slider-easy.min.js.map',
+            sourceRoot: '.'
+        }))
         .pipe(sourcemaps.write('./', {
             includeContent: false,
-            sourceRoot: './src'
-        }))
-        .pipe(rename(function(path) {
-            if (path.extname.indexOf('map') > -1) {
-                path.basename = 'angular-slider-easy.min';
-            }
+            sourceRoot: '.'
         }))
         .pipe(gulp.dest('./dist'));
 

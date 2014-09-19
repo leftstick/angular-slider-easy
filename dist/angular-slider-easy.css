@@ -1,0 +1,83 @@
+slider-easy {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+slider-easy .slider {
+  padding-top: 90px;
+  display: block;
+  vertical-align: middle;
+  position: relative;
+  width: 80%;
+  height: 20px;
+  margin: 0 auto;
+}
+slider-easy .slider .slider-track {
+  height: 10px;
+  width: 100%;
+  margin-top: -5px;
+  top: 50%;
+  left: 0;
+  position: absolute;
+  cursor: pointer;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8e8), to(#f9f9f9));
+  background-image: -webkit-linear-gradient(top, #e8e8e8, #f9f9f9);
+  background-image: linear-gradient(to bottom, #e8e8e8, #f9f9f9);
+  border-radius: 4px;
+}
+slider-easy .slider .slider-track .slider-selection {
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#80c8fe), to(#bfe3fe));
+  background-image: -webkit-linear-gradient(top, #80c8fe, #bfe3fe);
+  background-image: linear-gradient(to bottom, #80c8fe, #bfe3fe);
+  background-repeat: repeat-x;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 4px;
+}
+slider-easy .slider .slider-track .slider-handle {
+  margin-left: -10px;
+  margin-top: -5px;
+  border-radius: 20px;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #149bdf;
+  opacity: 0.8;
+}
+slider-easy .slider .hint {
+  top: 0;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1000;
+  display: block;
+  font-size: 12px;
+  line-height: 14px;
+  visibility: visible;
+}
+slider-easy .slider .hint .hint-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-color: transparent;
+  border-top-color: #000000;
+  border-width: 5px 5px 0 5px;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+slider-easy .slider .hint .hint-inner {
+  white-space: nowrap;
+  max-width: 200px;
+  padding: 8px;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  background-color: #000000;
+  border-radius: 4px;
+}
