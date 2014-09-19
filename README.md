@@ -7,7 +7,7 @@ This is an `angular` directive, by which, you would set up an slider-bar easily 
 
 ![](https://raw.githubusercontent.com/leftstick/angular-slider-easy/master/docs/img/example.png) 
 
-Try it: [jsBin]()
+Try it: [plunker](http://plnkr.co/edit/sf0a6NBQ8GO5NccIBMY8?p=preview)
 
 ## Requirement ##
 
@@ -90,7 +90,7 @@ $scope.val = {};
 | :------------- |:-------------| :-----|
 | point | number | will be filled while no `handles` set or `handles` has only one value in it. Which means, it is an point selector |
 | start | number | will be filled while `handles` is set with two values. Which means, it is an range selector |
-| start | number | will be filled while `handles` is set with two values. Which means, it is an range selector |
+| end | number | will be filled while `handles` is set with two values. Which means, it is an range selector |
 
 ## LICENSE ##
 
