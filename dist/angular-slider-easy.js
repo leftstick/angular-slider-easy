@@ -66,10 +66,10 @@
         if (!isPositiveInt(options.decimals)) {
             throw new Error('decimals must be +int');
         }
-        if (!isNumber(options.handles[0])) {
+        if (options.handles && !isNumber(options.handles[0])) {
             throw new Error('init 0 must be number');
         }
-        if (options.handles[1] && !isNumber(options.handles[1])) {
+        if (options.handles && options.handles[1] && !isNumber(options.handles[1])) {
             throw new Error('init 1 must be number');
         }
     };
@@ -160,6 +160,11 @@
 
                 validate(_options);
 
+                if (!_options.handles) {
+                    _options.handles = [];
+                    _options.handles[0] = _options.start;
+                }
+
                 var $slider, $track, $hint, $selection;
                 var len, width;
                 var minPoint, maxPoint;
@@ -187,7 +192,7 @@
                         $track.append($handle0);
                         $handle0.attr('id', 'handle0');
                     }
-                    initPoint0 = getPoint(len, width, _options.handles ? _options.handles[0] : _options.start);
+                    initPoint0 = getPoint(len, width, _options.handles[0]);
                     if (typeof $scope.value.start !== 'undefined') {
                         $handle0.css('left', getPoint(len, width, $scope.value.start) + 'px');
                         handlePos.handle0 = getPoint(len, width, $scope.value.start);
