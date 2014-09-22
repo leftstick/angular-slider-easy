@@ -5,7 +5,7 @@
  * @param option[expression]
  *              start[number]: a number of start point
  *              end[number]: a number of end point
- *              handles[array]: init points. if you want a range returned, this 
+ *              handles[array]: init points. if you want a range returned, this
  *                              has to be set
  *              decimals[int]: the number you want to keep as decimal
  *              outFormatter[function]: the function used to format the text at
@@ -77,6 +77,9 @@
     var getEvent = function(e) {
         if (e.touches && e.touches.length > 0) {
             return e.touches[0];
+        }
+        if (window.jQuery && window.jQuery.Event && e instanceof window.jQuery.Event && e.originalEvent.touches && e.originalEvent.touches.length > 0) {
+            return e.originalEvent.touches[0];
         }
         return e;
     };
