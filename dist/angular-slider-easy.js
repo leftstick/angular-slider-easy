@@ -147,7 +147,7 @@
         value.end = getValue(len, width, max, decimals);
     };
 
-    var dir = function() {
+    var dir = function($timeout) {
         return {
             restrict: 'E',
             scope: {
@@ -278,7 +278,12 @@
                     $handle1.on('mousedown touchstart', start1);
                 }
 
-                $win.on('resize', refresh);
+                $win.on('resize', function() {
+                    //this workaround works for some resize case
+                    $timeout(function() {
+                        refresh();
+                    }, 500);
+                });
 
                 $scope.$on('$destroy', function() {
                     $handle0.off('mousedown touchstart', start0);
@@ -293,7 +298,7 @@
         };
     };
 
-    mod.directive('sliderEasy', [dir]);
+    mod.directive('sliderEasy', ['$timeout', dir]);
 
 
 }(angular, document, window));
