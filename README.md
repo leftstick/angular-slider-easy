@@ -44,11 +44,11 @@ $scope.option = {
     start: 3,  //start point of the slider bar
     end: 218,  //end point of the slider bar
     handles: [19, 60],  //init point of two handles
-    outFormatter: function(value) {
+    outFormatter: function(value, decimals) {
         if (value.point) {
             return '当前值：' + value.point;
         } else {
-            return '选中范围：' + (value.end - value.start);
+            return '选中范围：' + (value.end - value.start).toFixed(decimals);
         }
     }//formatter of hint message
 };
@@ -80,7 +80,7 @@ $scope.val = {};
 | end | number | Yes | end point of the slider bar |
 | decimals | int | No | the number of decimals will be kept in `value`, 0 by default |
 | handles | array | No | the init points of handles. If you want a range set in `value`, this is mandantory. If handles is missed, only one handle with init point as `start` will be generated |
-| outFormatter | function | No | the formatter will be used format the hint message. usefull while you want to customize the hint message |
+| outFormatter | function(value, decimals) | No | the formatter will be used format the hint message. usefull while you want to customize the hint message |
 
 ### value[[expression]] ###
 

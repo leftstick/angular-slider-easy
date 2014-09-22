@@ -25,11 +25,11 @@
         start: 0,
         end: 100,
         decimals: 0,
-        outFormatter: function(value) {
+        outFormatter: function(value, decimals) {
             if (value.point) {
                 return 'Point is: ' + value.point;
             } else {
-                return 'Range is: ' + (value.end - value.start);
+                return 'Range is: ' + (value.end - value.start).toFixed(decimals);
             }
         }
     };
@@ -125,8 +125,8 @@
         }
     };
 
-    var setOutput = function($scope, value, outFormatter) {
-        $scope.output = outFormatter(value);
+    var setOutput = function($scope, _options) {
+        $scope.output = _options.outFormatter($scope.value);
     };
 
     var setSelction = function($selection, $handle0, $handle1) {
@@ -226,7 +226,7 @@
                         setSelction($selection, $handle0, $handle1);
                     }
                     setValue(len, width, _options.decimals, $scope.value, $handle0, $handle1);
-                    setOutput($scope, $scope.value, _options.outFormatter);
+                    setOutput($scope, _options);
                 };
 
 
@@ -243,7 +243,7 @@
                         setHintPosition($hint, $handle0, $handle1);
                         $scope.$apply(function() {
                             setValue(len, width, _options.decimals, $scope.value, $handle0, $handle1);
-                            setOutput($scope, $scope.value, _options.outFormatter);
+                            setOutput($scope, _options);
                         });
                     }
                     preventDefault(e);
