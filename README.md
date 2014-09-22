@@ -1,4 +1,4 @@
-# angular-slider-easy  ![](http://img.shields.io/badge/bower_module-v1.0.1-green.svg?) #
+# angular-slider-easy  ![](http://img.shields.io/badge/bower_module-v1.0.2-green.svg?) #
 ===================
 
 An angular slider directive aim to ease the way to build up friendly app
