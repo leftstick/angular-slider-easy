@@ -246,17 +246,16 @@
                             setOutput($scope, _options);
                         });
                     }
-                    preventDefault(e);
+                    preventDefault(event);
                 };
 
                 var end = function(event) {
-                    var e = getEvent(event);
                     offset = 0;
                     handlePos[activeHandle.attr('id')] = getMovement(activeHandle);
                     activeHandle = undefined;
                     $doc.off('mousemove touchmove', move);
                     $doc.off('mouseup touchend', end);
-                    preventDefault(e);
+                    preventDefault(event);
                 };
 
                 var getStart = function(handle) {
@@ -266,7 +265,7 @@
                         offset = e.clientX;
                         $doc.on('mousemove touchmove', move);
                         $doc.on('mouseup touchend', end);
-                        preventDefault(e);
+                        preventDefault(event);
                     };
                 };
 
