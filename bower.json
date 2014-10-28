@@ -1,8 +1,15 @@
 {
   "name": "angular-slider-easy",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/leftstick/angular-slider-easy",
   "description": "An angular slider directive aim to ease the way to build up friendly app",
+  "main": [
+    "./dist/angular-slider-easy.css",
+    "./dist/angular-slider-easy.js",
+    "./dist/angular-slider-easy.min.css",
+    "./dist/angular-slider-easy.min.js",
+    "./dist/angular-slider-easy.min.js.map"
+  ],
   "keywords": [
     "angularjs",
     "slider"
