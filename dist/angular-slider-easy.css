@@ -20,7 +20,6 @@ slider-easy .slider .slider-track {
   left: 0;
   position: absolute;
   cursor: pointer;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8e8), to(#f9f9f9));
   background-image: -webkit-linear-gradient(top, #e8e8e8, #f9f9f9);
   background-image: linear-gradient(to bottom, #e8e8e8, #f9f9f9);
   border-radius: 4px;
@@ -30,13 +29,10 @@ slider-easy .slider .slider-track .slider-selection {
   top: 0;
   bottom: 0;
   position: absolute;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#80c8fe), to(#bfe3fe));
   background-image: -webkit-linear-gradient(top, #80c8fe, #bfe3fe);
   background-image: linear-gradient(to bottom, #80c8fe, #bfe3fe);
   background-repeat: repeat-x;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border-radius: 4px;
 }
 slider-easy .slider .slider-track .slider-handle {
