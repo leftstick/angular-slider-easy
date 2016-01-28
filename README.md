@@ -1,5 +1,6 @@
 angular-slider-easy
 ====================
+![][bower-url]
 [![NPM version][npm-image]][npm-url]
 ![][david-url]
 ![][dt-url]
@@ -110,6 +111,7 @@ $scope.val = {};
 
 
 [expression]: https://docs.angularjs.org/guide/expression
+[bower-url]: https://img.shields.io/bower/v/angular-slider-easy.svg
 [npm-url]: https://npmjs.org/package/angular-slider-easy
 [npm-image]: https://badge.fury.io/js/angular-slider-easy.png
 [david-url]: https://david-dm.org/leftstick/angular-slider-easy.png
