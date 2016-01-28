@@ -11,13 +11,22 @@
  *              outFormatter[function]: the function used to format the text at
  *                                      hint area
  * @author Howard.Zuo
- * @date   Nov 10th, 2014
+ * @date   Jan 28th, 2016
  *
  **/
-(function (angular, document, window) {
+(function(global, factory) {
     'use strict';
 
-    var mod = angular.module('angular-slider-easy', []);
+    if (typeof exports === 'object') {
+        module.exports = factory(require('angular'));
+    } else if (typeof define === 'function' && define.amd) {
+        define(['angular'], factory);
+    } else {
+        factory(global.angular);
+    }
+
+}(window, function(ng) {
+    var mod = ng.module('angular-slider-easy', []);
 
     var handle = '<div class="slider-handle"></div>';
 
@@ -25,7 +34,7 @@
         start: 0,
         end: 100,
         decimals: 0,
-        outFormatter: function (value, decimals) {
+        outFormatter: function(value, decimals) {
             if (value.point) {
                 return 'Point is: ' + value.point;
             } else {
@@ -35,7 +44,7 @@
     };
 
 
-    var _defaults = function (dest, src) {
+    var _defaults = function(dest, src) {
         var dst = dest || {};
         if (!src || typeof src !== 'object') {
             return dst;
@@ -48,15 +57,15 @@
         return dst;
     };
 
-    var isNumber = function (n) {
+    var isNumber = function(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     };
 
-    var isPositiveInt = function (n) {
+    var isPositiveInt = function(n) {
         return n === parseInt(n) && n === Math.abs(n);
     };
 
-    var validate = function (options) {
+    var validate = function(options) {
         if (!isNumber(options.start)) {
             throw new Error('start must be number');
         }
@@ -88,7 +97,7 @@
 
     };
 
-    var getEvent = function (e) {
+    var getEvent = function(e) {
         if (e.touches && e.touches.length > 0) {
             return e.touches[0];
         }
@@ -98,7 +107,7 @@
         return e;
     };
 
-    var preventDefault = function (e) {
+    var preventDefault = function(e) {
         if (e.stopPropagation) {
             e.stopPropagation();
         }
@@ -107,19 +116,19 @@
         }
     };
 
-    var getMovement = function (element) {
+    var getMovement = function(element) {
         return parseInt(element.css('left'));
     };
 
-    var getPoint = function (len, width, num) {
+    var getPoint = function(len, width, num) {
         return (num / len) * width;
     };
 
-    var getValue = function (len, width, mov, decimals, opts) {
+    var getValue = function(len, width, mov, decimals, opts) {
         return ((mov / width) * len + opts.start).toFixed(decimals);
     };
 
-    var setHintPosition = function ($hint, $handle0, $handle1) {
+    var setHintPosition = function($hint, $handle0, $handle1) {
         var handle0 = getMovement($handle0);
         if (!$handle1) {
             $hint.css('left', (handle0 - 3 - $hint.prop('clientWidth') / 2) + 'px');
@@ -131,7 +140,7 @@
         $hint.css('left', ((max - min) / 2 + min - 3 - $hint.prop('clientWidth') / 2) + 'px');
     };
 
-    var setValue = function (len, width, decimals, value, $handle0, $handle1, opts) {
+    var setValue = function(len, width, decimals, value, $handle0, $handle1, opts) {
         if ($handle1) {
             setRange(len, width, decimals, value, $handle0, $handle1, opts);
         } else {
@@ -139,11 +148,11 @@
         }
     };
 
-    var setOutput = function ($scope, _options) {
+    var setOutput = function($scope, _options) {
         $scope.output = _options.outFormatter($scope.value);
     };
 
-    var setSelction = function ($selection, $handle0, $handle1) {
+    var setSelction = function($selection, $handle0, $handle1) {
         var handle0 = getMovement($handle0);
         var handle1 = getMovement($handle1);
         var max = Math.max(handle0, handle1);
@@ -152,7 +161,7 @@
         $selection.css('left', min + 'px').css('width', wid + 'px');
     };
 
-    var setRange = function (len, width, decimals, value, $handle0, $handle1, opts) {
+    var setRange = function(len, width, decimals, value, $handle0, $handle1, opts) {
         var handle0 = getMovement($handle0);
         var handle1 = getMovement($handle1);
         var max = Math.max(handle0, handle1);
@@ -161,17 +170,17 @@
         value.end = getValue(len, width, max, decimals, opts);
     };
 
-    var dir = function ($timeout) {
+    var dir = function($timeout) {
         return {
             restrict: 'E',
             scope: {
                 option: '=',
                 value: '='
             },
-            link: function ($scope, element) {
+            link: function($scope, element) {
 
-                var $doc = angular.element(document);
-                var $win = angular.element(window);
+                var $doc = ng.element(document);
+                var $win = ng.element(window);
 
                 var _options = _defaults($scope.option, defaults);
 
@@ -192,11 +201,11 @@
                 var activeHandle;
                 var handlePos = {};
 
-                var refresh = function () {
-                    $slider = angular.element(element.children()[0]);
-                    $track = angular.element($slider.children()[0]);
-                    $hint = angular.element($slider.children()[1]);
-                    $selection = angular.element($track.children()[0]);
+                var refresh = function() {
+                    $slider = ng.element(element.children()[0]);
+                    $track = ng.element($slider.children()[0]);
+                    $hint = ng.element($slider.children()[1]);
+                    $selection = ng.element($track.children()[0]);
 
                     len = _options.end - _options.start;
                     width = $slider.prop('clientWidth');
@@ -205,7 +214,7 @@
                     maxPoint = getPoint(len, width, _options.end - _options.start);
 
                     if (!$handle0) {
-                        $handle0 = angular.element(handle);
+                        $handle0 = ng.element(handle);
                         $track.append($handle0);
                         $handle0.attr('id', 'handle0');
                     }
@@ -224,7 +233,7 @@
 
                     if (_options.handles[1]) {
                         if (!$handle1) {
-                            $handle1 = angular.element(handle);
+                            $handle1 = ng.element(handle);
                             $track.append($handle1);
                             $handle1.attr('id', 'handle1');
                         }
@@ -243,10 +252,7 @@
                     setOutput($scope, _options);
                 };
 
-
-                refresh();
-
-                var move = function (event) {
+                var move = function(event) {
                     var e = getEvent(event);
                     var movement = handlePos[activeHandle.attr('id')] + e.clientX - offset;
                     if (movement >= minPoint && movement <= maxPoint) {
@@ -255,7 +261,7 @@
                             setSelction($selection, $handle0, $handle1);
                         }
                         setHintPosition($hint, $handle0, $handle1);
-                        $scope.$apply(function () {
+                        $scope.$apply(function() {
                             setValue(len, width, _options.decimals, $scope.value, $handle0, $handle1, _options);
                             setOutput($scope, _options);
                         });
@@ -263,7 +269,7 @@
                     preventDefault(event);
                 };
 
-                var end = function (event) {
+                var end = function(event) {
                     offset = 0;
                     handlePos[activeHandle.attr('id')] = getMovement(activeHandle);
                     activeHandle = undefined;
@@ -272,8 +278,8 @@
                     preventDefault(event);
                 };
 
-                var getStart = function (handle) {
-                    return function (event) {
+                var getStart = function(handle) {
+                    return function(event) {
                         var e = getEvent(event);
                         activeHandle = handle;
                         offset = e.clientX;
@@ -283,22 +289,25 @@
                     };
                 };
 
-                var start0 = getStart($handle0);
-                var start1 = getStart($handle1);
+                $timeout(refresh)
+                    .then(function() {
+                        var start0 = getStart($handle0);
+                        var start1 = getStart($handle1);
 
-                $handle0.on('mousedown touchstart', start0);
-                if ($handle1) {
-                    $handle1.on('mousedown touchstart', start1);
-                }
+                        $handle0.on('mousedown touchstart', start0);
+                        if ($handle1) {
+                            $handle1.on('mousedown touchstart', start1);
+                        }
+                    });
 
-                $win.on('resize', function () {
+                $win.on('resize', function() {
                     //this workaround works for some resize case
-                    $timeout(function () {
+                    $timeout(function() {
                         refresh();
                     }, 500);
                 });
 
-                $scope.$on('$destroy', function () {
+                $scope.$on('$destroy', function() {
                     $handle0.off('mousedown touchstart', start0);
                     if ($handle1) {
                         $handle1.off('mousedown touchstart', start1);
@@ -313,5 +322,5 @@
 
     mod.directive('sliderEasy', ['$timeout', dir]);
 
-
-}(angular, document, window));
+    return 'angular-slider-easy';
+}));

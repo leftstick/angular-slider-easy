@@ -8,7 +8,6 @@ var distPath = './dist/';
 var compileLess = function(isDemo) {
     var less = require('gulp-less');
     var prefix = require('gulp-autoprefixer');
-    var sourcemap = require('gulp-sourcemaps');
     var rename = require('gulp-rename');
     var merge = require('merge-stream');
 
@@ -16,7 +15,9 @@ var compileLess = function(isDemo) {
     var css = gulp.src('./src/angular-slider-easy.less')
         .pipe(less())
         .pipe(prefix({
-            browsers: ['last 5 versions'],
+            browsers: [
+                'last 5 versions'
+            ],
             cascade: true
         }))
         .pipe(gulp.dest(dest));
@@ -25,16 +26,12 @@ var compileLess = function(isDemo) {
     }
 
     var mincss = gulp.src('./src/angular-slider-easy.less')
-        .pipe(rename({
-            extname: '.min.css'
-        }))
-        .pipe(sourcemap.init())
-        .pipe(less({
-            compress: true
-        }))
-        .pipe(sourcemap.write())
+        .pipe(rename({extname: '.min.css'}))
+        .pipe(less({compress: true}))
         .pipe(prefix({
-            browsers: ['last 5 versions'],
+            browsers: [
+                'last 5 versions'
+            ],
             cascade: false
         }))
         .pipe(gulp.dest(dest));
@@ -52,21 +49,10 @@ var copyjs = function(isDemo) {
     var merge = require('merge-stream');
     var rename = require('gulp-rename');
     var uglify = require('gulp-uglify');
-    var sourcemaps = require('gulp-sourcemaps');
 
     var ugSrc = gulp.src('./src/angular-slider-easy.js')
-        .pipe(sourcemaps.init())
-        .pipe(rename({
-            extname: '.min.js'
-        }))
-        .pipe(uglify({
-            outSourceMap: 'angular-slider-easy.min.js.map',
-            sourceRoot: '.'
-        }))
-        .pipe(sourcemaps.write('./', {
-            includeContent: false,
-            sourceRoot: '.'
-        }))
+        .pipe(rename({extname: '.min.js'}))
+        .pipe(uglify())
         .pipe(gulp.dest('./dist'));
 
     return merge(copySrc, ugSrc);

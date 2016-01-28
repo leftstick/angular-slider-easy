@@ -29,8 +29,8 @@ slider-easy .slider .slider-track .slider-selection {
   top: 0;
   bottom: 0;
   position: absolute;
-  background-image: -webkit-linear-gradient(top, #80c8fe, #bfe3fe);
-  background-image: linear-gradient(to bottom, #80c8fe, #bfe3fe);
+  background-image: -webkit-linear-gradient(top, #80C8FE, #BFE3FE);
+  background-image: linear-gradient(to bottom, #80C8FE, #BFE3FE);
   background-repeat: repeat-x;
   box-sizing: border-box;
   border-radius: 4px;

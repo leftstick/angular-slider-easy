@@ -1,11 +1,16 @@
-# angular-slider-easy  ![](http://img.shields.io/badge/bower_module-v1.0.5-green.svg?) #
-===================
+angular-slider-easy
+====================
+[![NPM version][npm-image]][npm-url]
+![][david-url]
+![][dt-url]
+![][license-url]
+
 
 An angular slider directive aim to ease the way to build up friendly app
 
 This is an `angular` directive, by which, you would set up an slider-bar easily in few lines of code.
 
-![](https://raw.githubusercontent.com/leftstick/angular-slider-easy/master/docs/img/example.png) 
+![](https://raw.githubusercontent.com/leftstick/angular-slider-easy/master/docs/img/example.png)
 
 Try it: [plunker](http://plnkr.co/edit/sf0a6NBQ8GO5NccIBMY8?p=preview)
 
@@ -13,10 +18,16 @@ Try it: [plunker](http://plnkr.co/edit/sf0a6NBQ8GO5NccIBMY8?p=preview)
 
 - [angularjs](http://angularjs.org/) (1.2.0+)
 
-## Install ##
+## Install via bower ##
 
 ```JavaScript
-bower install angular-slider-easy --save
+bower install --save angular-slider-easy
+```
+
+## Install via npm ##
+
+```JavaScript
+npm install --save angular-slider-easy
 ```
 
 ## Basic Usage ##
@@ -99,3 +110,8 @@ $scope.val = {};
 
 
 [expression]: https://docs.angularjs.org/guide/expression
+[npm-url]: https://npmjs.org/package/angular-slider-easy
+[npm-image]: https://badge.fury.io/js/angular-slider-easy.png
+[david-url]: https://david-dm.org/leftstick/angular-slider-easy.png
+[dt-url]:https://img.shields.io/npm/dt/angular-slider-easy.svg
+[license-url]:https://img.shields.io/npm/l/angular-slider-easy.svg
