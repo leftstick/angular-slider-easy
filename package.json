@@ -1,6 +1,6 @@
 {
   "name": "angular-slider-easy",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "An angular slider directive aim to ease the way to build up friendly app",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
       "./dist/angular-slider-easy.min.css",
       "./dist/angular-slider-easy.min.js"
   ],
-  "main": "",
+  "main": "./src/angular-slider-easy.js",
   "keywords": [
     "angularjs",
     "slider"
