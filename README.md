@@ -13,74 +13,87 @@ This is an `angular` directive, by which, you would set up an slider-bar easily 
 
 ![](https://raw.githubusercontent.com/leftstick/angular-slider-easy/master/docs/img/example.png)
 
-Try it: [plunker](http://plnkr.co/edit/sf0a6NBQ8GO5NccIBMY8?p=preview)
+Try it: [plunker](http://plnkr.co/edit/Z2KiyGdlnWlXjhsHu3Ua?p=preview)
 
 ## Requirement ##
 
 - [angularjs](http://angularjs.org/) (1.2.0+)
 
-## Install via bower ##
+## Installation ##
+
+### Install via bower ###
 
 ```JavaScript
 bower install --save angular-slider-easy
 ```
 
-## Install via npm ##
+### Install via npm ###
 
 ```JavaScript
 npm install --save angular-slider-easy
 ```
 
-## Basic Usage ##
+## Import ##
 
-### Include `angular-slider-easy.*` ###
+### ES2015 ###
 
-```HTML
-<link rel="stylesheet" type="text/css" href="angular-slider-easy.css">
-<script type="text/javascript" src="angular-slider-easy.js"></script>
+```javascript
+import {sliderEasy} from 'angular-slider-easy';
+```
+
+### CommonJS ###
+
+```javascript
+var sliderEasy = require('angular-slider-easy').sliderEasy;
+```
+
+### Script ###
+
+```html
+<link rel="stylesheet" type="text/css" href="node_modules/angular-slider-easy/dist/angular-slider-easy.css" />
+<script type="text/javascript" src="angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-slider-easy/dist/angular-slider-easy.min.js"></script>
+<script type="text/javascript">
+    var sliderEasy = window.sliderEasy;
+</script>
 ```
 
 > Be sure load `angular-slider-easy.js` after `angular.js` is loaded.
 
-
-### Set `angular-slider-easy` as dependency ###
+## Usage ##
 
 ```JavaScript
-var demo = angular.module('demo', ['angular-slider-easy']);
+var demo = angular.module('demo', [sliderEasy]);
 ```
 
-### Set `option` in `ngController` ###
+**Use slider-easy directive in the template**
+
+```HTML
+<slider-easy value="val" option="opts"></slider-easy>
+<span>{{ val }}</span> <!-- display the val while moving the slider handle -->
+```
+
+### Define `option` and `value` in `ngController` ###
 
 ```JavaScript
-$scope.option = {
+
+$scope.val = {};
+
+$scope.opts = {
     start: 3,  //start point of the slider bar
     end: 218,  //end point of the slider bar
     handles: [19, 60],  //init point of two handles
     outFormatter: function(value, decimals) {
         if (value.point) {
-            return '当前值：' + value.point;
+            return 'Current value is：' + value.point;
         } else {
-            return '选中范围：' + (value.end - value.start).toFixed(decimals);
+            return 'Selected range is：' + (value.end - value.start).toFixed(decimals);
         }
     }//formatter of hint message
 };
 ```
 
-### Set `value` in `ngController` ###
-
-```JavaScript
-$scope.val = {};
-```
-
-> This is very important, you won't get the selected point/range if you missed this variable
-
-### Use `directive` in `HTML` ###
-
-```HTML
-<slider-easy value="val" option="option"></slider-easy>
-<span>{{ val }}</span> <!-- display the val while moving the slider handle -->
-```
-
+>This is very important, you won't get the selected point/range if you miss the variable `value`
 
 ## API ##
 
